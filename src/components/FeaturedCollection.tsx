@@ -1,9 +1,11 @@
 import React from "react";
 import { ProductType } from "@/pages";
 import Link from "next/link";
+import useCeloConnect from "../hooks/useCeloConnect";
 
 const FeaturedCollection = ({ products }: { products: ProductType[] }) => {
-  // const FeatureColl = [
+  const {currency} = useCeloConnect()
+  // const FeatureCProductsoll = [
   //   {
   //     id: 1,
   //     image: "/img/water.png",
@@ -50,8 +52,8 @@ const FeaturedCollection = ({ products }: { products: ProductType[] }) => {
                 
                 <p className="text-[gray] text-sm mt-3">Left in stock: {item.stock}</p>
                 <p className="text-lg">
-											Price ${Number(item.price).toFixed(2)}
-										</p>
+                Price: {Number(item.price).toFixed(2)} {currency}
+                </p>
               </Link>
             ))}
           </div>

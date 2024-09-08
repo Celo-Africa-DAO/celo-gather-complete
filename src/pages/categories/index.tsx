@@ -1,110 +1,121 @@
-import useCeloConnect from "@/components/hooks/useCeloConnect";
+// import useCeloConnect from "@/components/hooks/useCeloConnect";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { ProductType } from "./";
 import { ethers } from "ethers";
+import { useAccount } from "wagmi";
+import { ProductType } from "..";
+import useCeloConnect from "@/hooks/useCeloConnect";
 
 const Categories = () => {
-	const { checkConnection, mundoContract } = useCeloConnect();
+	const { checkConnection, mundoContract, currency } = useCeloConnect();
 	const [electronicsCat, setElectronicsCat] = useState<ProductType[]>([]);
 	const [clothingsCat, setClothingsCat] = useState<ProductType[]>([]);
 	const [petsCat, setPetsCat] = useState<ProductType[]>([]);
+	const { chainId } = useAccount();
+	
 
 	useEffect(() => {
+		let decimal: number;
+		if (chainId === 44787) {
+			decimal = 6;
+		} else if (chainId === 42220) {
+			decimal = 18;
+		}
+        if(!mundoContract) return;
 		const getAllItems = async () => {
-			const tx = await mundoContract.getAllItems();
+			const items = await mundoContract.getAllMarketPlaceItems();
 
-			const res = tx.map((t) => {
+			const res = items.map((item: any) => {
 				return {
-					id: Number(t[0]),
-					name: t[1],
-					category: t[2],
-					image: t[3],
-					price: ethers.formatUnits(t[4], 6),
-					rating: Number(t[5]),
-					stock: Number(t[6]),
-					description: t[7],
+					id: Number(item[0]),
+					name: item[1],
+					category: item[2],
+					image: item[3],
+					price: ethers.formatUnits(item[4], decimal),
+					rating: Number(item[5]),
+					stock: Number(item[6]),
+					description: item[7],
 				};
 			});
 
 			const filteredElect = res.filter(
-				(item) => item.category === "electronics"
+				(item: ProductType) => item.category === "electronics"
 			);
 			const filteredClothing = res.filter(
-				(item) => item.category === "clothing"
+				(item: ProductType) => item.category === "clothing"
 			);
-			const filteredPets = res.filter((item) => item.category === "pets");
+			const filteredPets = res.filter((item: any) => item.category === "pets");
 			setElectronicsCat(filteredElect);
 			setClothingsCat(filteredClothing);
 			setPetsCat(filteredPets);
 		};
 		mundoContract && getAllItems();
-	}, [mundoContract]);
-	const a = [
-		{
-			id: 1,
-			title: "Featured NFTs",
-			img: "/img/art.png",
-			text: "Digital Art",
-			description: "12,000 items",
-		},
-		{
-			id: 2,
-			img: "/img/collectibles.png",
-			text: "Collectibles",
-			description: "20,000 items",
-		},
-		{
-			id: 3,
-			img: "/img/Depth.png",
-			text: "Virtual Real Estate",
-			description: "30,000 items",
-		},
-	];
+	}, [mundoContract, chainId]);
+	// const a = [
+	// 	{
+	// 		id: 1,
+	// 		title: "Featured NFTs",
+	// 		img: "/img/art.png",
+	// 		text: "Digital Art",
+	// 		description: "12,000 items",
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		img: "/img/collectibles.png",
+	// 		text: "Collectibles",
+	// 		description: "20,000 items",
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		img: "/img/Depth.png",
+	// 		text: "Virtual Real Estate",
+	// 		description: "30,000 items",
+	// 	},
+	// ];
 
-	const b = [
-		{
-			id: 4,
-			title: "Digital Arts",
-			img: "/img/Abstract.png",
-			text: "Abstract Art",
-			description: "100 items",
-		},
-		{
-			id: 5,
-			img: "/img/pop.png",
-			text: "Pop Art",
-			description: "200 items",
-		},
-		{
-			id: 6,
-			img: "/img/Surreal-art.png",
-			text: "Surreal Art",
-			description: "300 items",
-		},
-	];
+	// const b = [
+	// 	{
+	// 		id: 4,
+	// 		title: "Digital Arts",
+	// 		img: "/img/Abstract.png",
+	// 		text: "Abstract Art",
+	// 		description: "100 items",
+	// 	},
+	// 	{
+	// 		id: 5,
+	// 		img: "/img/pop.png",
+	// 		text: "Pop Art",
+	// 		description: "200 items",
+	// 	},
+	// 	{
+	// 		id: 6,
+	// 		img: "/img/Surreal-art.png",
+	// 		text: "Surreal Art",
+	// 		description: "300 items",
+	// 	},
+	// ];
 
-	const c = [
-		{
-			id: 7,
-			title: "Virtual Real Estate",
-			img: "/img/metaverse.png",
-			text: "Metaverse City",
-			description: "1000 items",
-		},
-		{
-			id: 8,
-			img: "/img/decentraland.png",
-			text: "Decentraland",
-			description: "2000 items",
-		},
-		{
-			id: 9,
-			img: "/img/crytovoxels.png",
-			text: "Cryptovoxels",
-			description: "3000 items",
-		},
-	];
+	// const c = [
+	// 	{
+	// 		id: 7,
+	// 		title: "Virtual Real Estate",
+	// 		img: "/img/metaverse.png",
+	// 		text: "Metaverse City",
+	// 		description: "1000 items",
+	// 	},
+	// 	{
+	// 		id: 8,
+	// 		img: "/img/decentraland.png",
+	// 		text: "Decentraland",
+	// 		description: "2000 items",
+	// 	},
+	// 	{
+	// 		id: 9,
+	// 		img: "/img/crytovoxels.png",
+	// 		text: "Cryptovoxels",
+	// 		description: "3000 items",
+	// 	},
+	// ];
 
 	return (
 		<div className="space-y-7">
@@ -139,7 +150,7 @@ const Categories = () => {
 											{item.description}
 										</p> */}
 										<p className="text-xl">
-											Price ${Number(item.price).toFixed(2)}
+											Price: {Number(item.price).toFixed(2)} {currency}
 										</p>
 									</Link>
 								</div>
@@ -174,7 +185,7 @@ const Categories = () => {
 											{item.description}
 										</p> */}
 										<p className="text-xl">
-											Price ${Number(item.price).toFixed(2)}
+										Price: {Number(item.price).toFixed(2)} {currency}
 										</p>
 									</Link>
 								</div>
@@ -207,7 +218,7 @@ const Categories = () => {
 											{item.description}
 										</p> */}
 										<p className="text-xl">
-											Price ${Number(item.price).toFixed(2)}
+										Price: {Number(item.price).toFixed(2)} {currency}
 										</p>
 									</Link>
 								</div>

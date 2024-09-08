@@ -47,7 +47,7 @@ function App({ Component, pageProps }: AppProps) {
         <RainbowKitProvider showRecentTransactions={true}>
           <RootLayout>
             <ToastContainer />
-            <Component {...pageProps} />
+            <Component  {...pageProps} />
           </RootLayout>
         </RainbowKitProvider>
       </QueryClientProvider>
