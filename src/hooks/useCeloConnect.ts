@@ -12,7 +12,6 @@ import {
 	CKES_CA,
 } from "../utils/constants";
 
-type ChainId = 44787 | 42220;
 type Currency = "USDC" | "cKES" | null;
 
 export default function useCeloConnect() {

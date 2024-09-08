@@ -4,34 +4,7 @@ import Link from "next/link";
 import useCeloConnect from "../hooks/useCeloConnect";
 
 const FeaturedCollection = ({ products }: { products: ProductType[] }) => {
-  const {currency} = useCeloConnect()
-  // const FeatureCProductsoll = [
-  //   {
-  //     id: 1,
-  //     image: "/img/water.png",
-  //     text: "The Future of Music",
-  //     description:
-  //       "Snoop Dogg, The Weekend, and more",
-  //   },
-  //   {
-  //     id: 2,
-  //     image: "/img/lady.png",
-  //     text: "Digital Fashion Week",
-  //     description: "Shoe runway looks from top designer",
-  //   },
-  //   {
-  //     id: 3,
-  //     image: "/img/mirror.png",
-  //     text: "Emerging Artists",
-  //     description: "Discover the next big name",
-  //   },
-  //   {
-  //     id: 4,
-  //     image: "/img/adventure.png",
-  //     text: "Art for the Metaverse",
-  //     description: "Collect digital art inspired by the internet",
-  //   },
-  // ];
+  const { currency } = useCeloConnect();
 
   return (
     <>
@@ -41,7 +14,11 @@ const FeaturedCollection = ({ products }: { products: ProductType[] }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full ">
             {products?.map((item) => (
-              <Link href={`/item/${item.id}`} key={item.id} className="hover:bg-gray-800 p-[15px]">
+              <Link
+                href={`/item/${item.id}`}
+                key={item.id}
+                className="hover:bg-gray-800 p-[15px]"
+              >
                 <img
                   src={item.image}
                   alt={item.name}
@@ -49,10 +26,12 @@ const FeaturedCollection = ({ products }: { products: ProductType[] }) => {
                 />
                 <h4 className="mt-5 text-xl ">{item.name}</h4>
                 {/* <p className="text-[gray] ">{item.description}</p> */}
-                
-                <p className="text-[gray] text-sm mt-3">Left in stock: {item.stock}</p>
+
+                <p className="text-[gray] text-sm mt-3">
+                  Left in stock: {item.stock}
+                </p>
                 <p className="text-lg">
-                Price: {Number(item.price).toFixed(2)} {currency}
+                  Price: {Number(item.price).toFixed(2)} {currency}
                 </p>
               </Link>
             ))}

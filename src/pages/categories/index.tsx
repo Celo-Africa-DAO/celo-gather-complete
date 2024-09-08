@@ -1,4 +1,3 @@
-// import useCeloConnect from "@/components/hooks/useCeloConnect";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
@@ -51,72 +50,7 @@ const Categories = () => {
 		};
 		mundoContract && getAllItems();
 	}, [mundoContract, chainId]);
-	// const a = [
-	// 	{
-	// 		id: 1,
-	// 		title: "Featured NFTs",
-	// 		img: "/img/art.png",
-	// 		text: "Digital Art",
-	// 		description: "12,000 items",
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		img: "/img/collectibles.png",
-	// 		text: "Collectibles",
-	// 		description: "20,000 items",
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		img: "/img/Depth.png",
-	// 		text: "Virtual Real Estate",
-	// 		description: "30,000 items",
-	// 	},
-	// ];
-
-	// const b = [
-	// 	{
-	// 		id: 4,
-	// 		title: "Digital Arts",
-	// 		img: "/img/Abstract.png",
-	// 		text: "Abstract Art",
-	// 		description: "100 items",
-	// 	},
-	// 	{
-	// 		id: 5,
-	// 		img: "/img/pop.png",
-	// 		text: "Pop Art",
-	// 		description: "200 items",
-	// 	},
-	// 	{
-	// 		id: 6,
-	// 		img: "/img/Surreal-art.png",
-	// 		text: "Surreal Art",
-	// 		description: "300 items",
-	// 	},
-	// ];
-
-	// const c = [
-	// 	{
-	// 		id: 7,
-	// 		title: "Virtual Real Estate",
-	// 		img: "/img/metaverse.png",
-	// 		text: "Metaverse City",
-	// 		description: "1000 items",
-	// 	},
-	// 	{
-	// 		id: 8,
-	// 		img: "/img/decentraland.png",
-	// 		text: "Decentraland",
-	// 		description: "2000 items",
-	// 	},
-	// 	{
-	// 		id: 9,
-	// 		img: "/img/crytovoxels.png",
-	// 		text: "Cryptovoxels",
-	// 		description: "3000 items",
-	// 	},
-	// ];
-
+	
 	return (
 		<div className="space-y-7">
 			<div className="px-4 md:px-8 lg:px-[160px] my-4">
